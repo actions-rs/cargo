@@ -33,4 +33,13 @@ jobs:
 * `command` (*required*) - Cargo command to run (ex. `check` or `build`)
 * `toolchain` - Rust toolchain to use (without the `+` sign, ex. `nightly`)
 * `args` - Arguments for the cargo command
-* `use-cross` - Use [cross](https://github.com/rust-embedded/cross) instead of cargo (default: `false`)
+* `use-cross` - Use [`cross`](https://github.com/rust-embedded/cross) instead of `cargo` (default: `false`)
+
+## Why?
+
+Why is it needed when you can just do the `-run: cargo build` step?
+
+Because it can call [cross](https://github.com/rust-embedded/cross) instead of `cargo`
+if needed. If `cross` is not installed, it will be installed automatically on a first call.
+
+In a future this Action might be available to install other cargo subcommands on demand too.
