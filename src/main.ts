@@ -30,12 +30,13 @@ async function run() {
         program = 'cargo';
     }
 
-    let args: string[] = [];
+    let args: string[] = [actionInput.command];
     if (actionInput.toolchain) {
         args.push(`+${actionInput.toolchain}`);
     }
 
     args = args.concat(actionInput.args);
+    console.log(program, args);
 
     try {
         await exec.exec(program, args);
