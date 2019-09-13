@@ -4,6 +4,8 @@ import * as io from '@actions/io';
 
 import * as input from './input';
 
+const CROSS_REV: string = '69b8da7da287055127812c9e4b071756c2b98545';
+
 async function getCross(): Promise<string> {
     try {
         return await io.which('cross', true);
@@ -12,14 +14,20 @@ async function getCross(): Promise<string> {
     }
 
     try {
-        // Latest `cross` (0.1.15) is kinda broken right now,
-        // using hardcoded version till the fix lands
-        // https://github.com/rust-embedded/cross/issues/306
-        await exec.exec('cargo', ['install', '--version', '0.1.14', 'cross']);
+        core.warning('Git version of cross will be installed, \
+             see https://github.com/actions-rs/cargo/issues/1');
+        await exec.exec('cargo', [
+            'install',
+            '--rev',
+            CROSS_REV,
+            '--git',
+            'https://github.com/rust-embedded/cross.git'
+        ]);
     } catch (error) {
         core.setFailed(error.message);
     }
 
+    // Expecting it to be in PATH already
     return 'cross';
 }
 
@@ -33,13 +41,12 @@ async function run() {
         program = 'cargo';
     }
 
-    let args: string[] = [actionInput.command];
+    let args: string[] = [];
     if (actionInput.toolchain) {
         args.push(`+${actionInput.toolchain}`);
     }
-
+    args.push(actionInput.command);
     args = args.concat(actionInput.args);
-    console.log(program, args);
 
     try {
         await exec.exec(program, args);
