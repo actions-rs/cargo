@@ -5,6 +5,8 @@
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
 
+import stringArgv from 'string-argv';
+
 // Workaround for a GH bug: https://github.com/actions/toolkit/issues/127
 //
 // For input `all-features: true` it will generate the `INPUT_ALL-FEATURES: true`
@@ -41,8 +43,7 @@ export interface Input {
 
 export function parse(): Input {
     const command = getInput('command');
-    // TODO: This probably will strike back later
-    const args = getInput('args').split(' ');
+    const args = stringArgv(getInput('args'));
     let toolchain = getInput('toolchain');
     if (toolchain.startsWith('+')) {
         toolchain = toolchain.slice(1);

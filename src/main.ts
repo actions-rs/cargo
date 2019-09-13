@@ -10,12 +10,13 @@ async function getCross(): Promise<string> {
     try {
         return await io.which('cross', true);
     } catch (error) {
-        core.warning('Unable to find cross, installing it now');
+        core.debug('Unable to find cross, installing it now');
     }
 
     try {
+        core.startGroup('Install cross');
         core.warning('Git version of cross will be installed, \
-             see https://github.com/actions-rs/cargo/issues/1');
+see https://github.com/actions-rs/cargo/issues/1');
         await exec.exec('cargo', [
             'install',
             '--rev',
@@ -25,6 +26,9 @@ async function getCross(): Promise<string> {
         ]);
     } catch (error) {
         core.setFailed(error.message);
+        throw new Error(error);
+    } finally {
+        core.endGroup();
     }
 
     // Expecting it to be in PATH already
