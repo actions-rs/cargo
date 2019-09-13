@@ -12,7 +12,10 @@ async function getCross(): Promise<string> {
     }
 
     try {
-        await exec.exec('cargo', ['install', 'cross']);
+        // Latest `cross` (0.1.15) is kinda broken right now,
+        // using hardcoded version till the fix lands
+        // https://github.com/rust-embedded/cross/issues/306
+        await exec.exec('cargo', ['install', '--version', '0.1.14', 'cross']);
     } catch (error) {
         core.setFailed(error.message);
     }
