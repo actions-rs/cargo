@@ -1,5 +1,7 @@
 # Rust `cargo` Action
 
+[![Gitter](https://badges.gitter.im/actions-rs/community.svg)](https://gitter.im/actions-rs/community)
+
 This GitHub Action runs specified [`cargo`](https://github.com/rust-lang/cargo)
 command on a Rust language project.
 
