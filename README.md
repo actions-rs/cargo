@@ -35,7 +35,7 @@ jobs:
 
 ## Virtual environments
 
-Note that `cargo` is not available by default for all [virtual environments](https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions);
+Note that `cargo` is not available by default for some [virtual environments](https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions);
 for example, as for 2019-09-15, `macOS` env is missing it.
 
 You can use [`actions-rs/toolchain`](https://github.com/actions-rs/toolchain)
