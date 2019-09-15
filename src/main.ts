@@ -9,11 +9,30 @@ import * as input from './input';
 
 const CROSS_REV: string = '69b8da7da287055127812c9e4b071756c2b98545';
 
-async function getCross(): Promise<string> {
+// TODO: `core.info` function is not published yet as for `1.0.1` version,
+// bundling it.
+function core_info(message: string): void {
+    process.stdout.write(message + os.EOL);
+}
+
+async function getCargo(): Promise<string> {
+    try {
+        return await io.which('cargo', true);
+    } catch (error) {
+        core_info('cargo is not installed by default for some virtual environments, \
+see https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions');
+        core_info('To install it, use this action: https://github.com/actions-rs/toolchain');
+
+        throw error;
+    }
+}
+
+async function getCross(cargoPath: string): Promise<string> {
     try {
         return await io.which('cross', true);
     } catch (error) {
         core.debug('Unable to find cross, installing it now');
+        throw error;
     }
 
     // Somewhat new Rust is required to compile `cross`
@@ -29,11 +48,12 @@ async function getCross(): Promise<string> {
 
     const cwd = process.cwd();
     process.chdir(os.tmpdir());
+
     try {
         core.startGroup('Install cross');
         core.warning('Git version of cross will be installed, \
 see https://github.com/actions-rs/cargo/issues/1');
-        await exec.exec('cargo', [
+        await exec.exec(cargoPath, [
             'install',
             '--rev',
             CROSS_REV,
@@ -41,8 +61,7 @@ see https://github.com/actions-rs/cargo/issues/1');
             'https://github.com/rust-embedded/cross.git'
         ]);
     } catch (error) {
-        core.setFailed(error.message);
-        throw new Error(error);
+        throw error;
     } finally {
         // It is important to chdir back!
         process.chdir(cwd);
@@ -53,14 +72,15 @@ see https://github.com/actions-rs/cargo/issues/1');
     return 'cross';
 }
 
-async function run() {
+async function run(): Promise<void> {
     const actionInput = input.parse();
+    const cargo = await getCargo();
 
     let program;
     if (actionInput.useCross) {
-        program = await getCross();
+        program = await getCross(cargo);
     } else {
-        program = 'cargo';
+        program = cargo;
     }
 
     let args: string[] = [];
@@ -70,12 +90,15 @@ async function run() {
     args.push(actionInput.command);
     args = args.concat(actionInput.args);
 
+    await exec.exec(program, args);
+}
+
+async function main(): Promise<void> {
     try {
-        await exec.exec(program, args);
+        await run();
     } catch (error) {
         core.setFailed(error.message);
-        throw error;
     }
 }
 
-run();
+main();
