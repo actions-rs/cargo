@@ -32,7 +32,6 @@ async function getCross(cargoPath: string): Promise<string> {
         return await io.which('cross', true);
     } catch (error) {
         core.debug('Unable to find cross, installing it now');
-        throw error;
     }
 
     // Somewhat new Rust is required to compile `cross`
