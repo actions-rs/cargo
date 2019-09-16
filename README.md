@@ -25,6 +25,8 @@ jobs:
           arguments: --release --all-features
 ```
 
+See [additional recipes here](https://github.com/actions-rs/meta).
+
 ## Inputs
 
 * `command` (*required*) - Cargo command to run (ex. `check` or `build`)
