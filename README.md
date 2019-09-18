@@ -22,7 +22,7 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: build
-          arguments: --release --all-features
+          args: --release --all-features
 ```
 
 See [additional recipes here](https://github.com/actions-rs/meta).
