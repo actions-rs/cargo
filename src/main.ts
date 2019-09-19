@@ -9,19 +9,13 @@ import * as input from './input';
 
 const CROSS_REV: string = '69b8da7da287055127812c9e4b071756c2b98545';
 
-// TODO: `core.info` function is not published yet as for `1.0.1` version,
-// bundling it.
-function core_info(message: string): void {
-    process.stdout.write(message + os.EOL);
-}
-
 async function getCargo(): Promise<string> {
     try {
         return await io.which('cargo', true);
     } catch (error) {
-        core_info('cargo is not installed by default for some virtual environments, \
+        core.info('cargo is not installed by default for some virtual environments, \
 see https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions');
-        core_info('To install it, use this action: https://github.com/actions-rs/toolchain');
+        core.info('To install it, use this action: https://github.com/actions-rs/toolchain');
 
         throw error;
     }
