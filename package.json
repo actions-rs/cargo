@@ -28,7 +28,7 @@
         "url": "https://github.com/actions-rs/cargo/issues"
     },
     "dependencies": {
-        "@actions/core": "^1.0.1",
+        "@actions/core": "^1.1.1",
         "@actions/exec": "^1.0.1",
         "@actions/io": "^1.0.1",
         "string-argv": "^0.3.1"
