@@ -8,14 +8,14 @@ const testEnvVars = {
     INPUT_TOOLCHAIN: '+nightly'
 }
 
-describe('actions-rs/check', () => {
+describe('actions-rs/cargo/input', () => {
     beforeEach(() => {
     for (const key in testEnvVars)
         process.env[key] = testEnvVars[key as keyof typeof testEnvVars]
     })
 
     it('Parses action input into cargo input', async () => {
-        const result = input.parse();
+        const result = input.get();
 
         expect(result.command).toBe('build');
         expect(result.args).toStrictEqual([
