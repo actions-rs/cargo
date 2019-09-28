@@ -29,11 +29,12 @@ See [additional recipes here](https://github.com/actions-rs/meta).
 
 ## Inputs
 
-* `command` (*required*) - Cargo command to run (ex. `check` or `build`)
-* `toolchain` - Rust toolchain to use (without the `+` sign, ex. `nightly`);\
-    Override or system toolchain will be used if omitted.
-* `args` - Arguments for the cargo command
-* `use-cross` - Use [`cross`](https://github.com/rust-embedded/cross) instead of `cargo` (default: `false`)
+| Name        | Required | Description                                                              | Type   | Default |
+| ------------| -------- | -------------------------------------------------------------------------| ------ | --------|
+| `command`   | ✓        | Cargo command to run, ex. `check` or `build`                             | string |         |
+| `toolchain` |          | Rust toolchain name to use                                               | string |         |
+| `args`      |          | Arguments for the cargo command                                          | string |         |     
+| `use-cross` |          | Use [`cross`](https://github.com/rust-embedded/cross) instead of `cargo` | bool   | false   |
 
 ## Virtual environments
 
