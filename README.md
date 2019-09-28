@@ -30,7 +30,7 @@ See [additional recipes here](https://github.com/actions-rs/meta).
 ## Inputs
 
 | Name        | Required | Description                                                              | Type   | Default |
-| ------------| -------- | -------------------------------------------------------------------------| ------ | --------|
+| ------------| :------: | -------------------------------------------------------------------------| ------ | --------|
 | `command`   | ✓        | Cargo command to run, ex. `check` or `build`                             | string |         |
 | `toolchain` |          | Rust toolchain name to use                                               | string |         |
 | `args`      |          | Arguments for the cargo command                                          | string |         |     
