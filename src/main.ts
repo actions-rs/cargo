@@ -25,8 +25,8 @@ export async function run(actionInput: input.Input): Promise<void> {
 
 async function main(): Promise<void> {
     const matchersPath = path.join(__dirname, '.matchers');
-    console.log(`::[add-matcher]${path.join(matchersPath, 'rust.json')}`);
-    console.log(`::[add-matcher]${path.join(matchersPath, 'rustfmt.json')}`);
+    console.log(`::add-matcher::${path.join(matchersPath, 'rust.json')}`);
+    console.log(`::add-matcher::${path.join(matchersPath, 'rustfmt.json')}`);
 
     const actionInput = input.get();
 

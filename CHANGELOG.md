@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Problem matcher which will highlight warnings and errors in the cargo output
+- Problem matcher to highlight warnings and errors in the cargo output
+- Problem matcher to highlight difference messages in the `rustfmt` output
 
 ### Changed
 
