@@ -24,11 +24,14 @@ export async function run(actionInput: input.Input): Promise<void> {
 }
 
 async function main(): Promise<void> {
+    const actionInput = input.get();
+
     const matchersPath = path.join(__dirname, '.matchers');
     console.log(`::add-matcher::${path.join(matchersPath, 'rust.json')}`);
-    console.log(`::add-matcher::${path.join(matchersPath, 'rustfmt.json')}`);
-
-    const actionInput = input.get();
+    // Enabling `rustfmt` problem matcher only if `cargo fmt` is called
+    if (actionInput.command == 'fmt') {
+        console.log(`::add-matcher::${path.join(matchersPath, 'rustfmt.json')}`);
+    }
 
     try {
         await run(actionInput);
