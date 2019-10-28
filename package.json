@@ -34,7 +34,7 @@
         "string-argv": "^0.3.1"
     },
     "devDependencies": {
-        "@types/jest": "^24.0.19",
+        "@types/jest": "^24.0.20",
         "@types/node": "^12.11.1",
         "@zeit/ncc": "^0.20.5",
         "jest": "^24.9.0",
