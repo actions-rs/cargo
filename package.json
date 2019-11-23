@@ -1,6 +1,6 @@
 {
     "name": "rust-cargo",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "private": false,
     "description": "Run cargo command",
     "main": "lib/main.js",
