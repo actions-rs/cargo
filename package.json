@@ -37,9 +37,9 @@
         "@types/jest": "^25.1.1",
         "@types/node": "^13.7.7",
         "@zeit/ncc": "^0.21.0",
-        "jest": "^24.9.0",
+        "jest": "^25.1.0",
         "jest-circus": "^25.1.0",
-        "ts-jest": "^24.3.0",
+        "ts-jest": "^25.2.1",
         "typescript": "^3.8.3"
     }
 }
