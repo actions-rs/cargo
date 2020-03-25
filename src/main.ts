@@ -1,9 +1,9 @@
-const path = require('path');
+import path from "path";
 
-import * as core from '@actions/core';
+import * as core from "@actions/core";
 
-import * as input from './input';
-import {Cargo, Cross} from '@actions-rs/core';
+import * as input from "./input";
+import { Cargo, Cross } from "@actions-rs/core";
 
 export async function run(actionInput: input.Input): Promise<void> {
     let program;
@@ -24,8 +24,8 @@ export async function run(actionInput: input.Input): Promise<void> {
 }
 
 async function main(): Promise<void> {
-    const matchersPath = path.join(__dirname, '.matchers');
-    console.log(`::add-matcher::${path.join(matchersPath, 'rust.json')}`);
+    const matchersPath = path.join(__dirname, ".matchers");
+    console.log(`::add-matcher::${path.join(matchersPath, "rust.json")}`);
 
     const actionInput = input.get();
 

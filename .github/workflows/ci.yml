@@ -3,21 +3,16 @@ name: Continuous integration
 on: [pull_request, push]
 
 jobs:
-  check_pr:
+  test:
     runs-on: ubuntu-latest
     steps:
-    - name: Create npm configuration
-      run: echo "//npm.pkg.github.com/:_authToken=${token}" >> ~/.npmrc
-      env:
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create npm configuration
+        run: echo "//npm.pkg.github.com/:_authToken=${token}" >> ~/.npmrc
+        env:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - uses: actions/checkout@v1
-
-    - name: "npm ci"
-      run: npm ci
-
-    - name: "npm run build"
-      run: npm run build
-
-    - name: "npm run test"
-      run: npm run test
+      - uses: actions/checkout@v2
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run test

@@ -1,10 +1,22 @@
 # Rust `cargo` Action
 
+[![Sponsoring](https://img.shields.io/badge/Support%20it-Say%20%22Thank%20you!%22-blue)](https://actions-rs.github.io/#sponsoring)
 ![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)
 [![Gitter](https://badges.gitter.im/actions-rs/community.svg)](https://gitter.im/actions-rs/community)
+![Continuous integration](https://github.com/actions-rs/cargo/workflows/Continuous%20integration/badge.svg)
+![Dependabot enabled](https://api.dependabot.com/badges/status?host=github&repo=actions-rs/toolchain)
 
 This GitHub Action runs specified [`cargo`](https://github.com/rust-lang/cargo)
 command on a Rust language project.
+
+**Table of Contents**
+
+* [Example workflow](#example-workflow)
+* [Inputs](#inputs)
+* [Virtual environments](#virtual-environments)
+* [Cross-compilation](#cross-compilation)
+* [License](#license)
+* [Contribute and support](#contribute-and-support)
 
 ## Example workflow
 
@@ -18,7 +30,7 @@ jobs:
     name: Rust project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
       - uses: actions-rs/cargo@v1
         with:
           command: build
@@ -36,22 +48,23 @@ See [additional recipes here](https://github.com/actions-rs/meta).
 | `args`      |          | Arguments for the cargo command                                          | string |         |     
 | `use-cross` |          | Use [`cross`](https://github.com/rust-embedded/cross) instead of `cargo` | bool   | false   |
 
-## Virtual environments
+## Toolchain
 
-Note that `cargo` is not available by default for some [virtual environments](https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions);
-for example, as for 2019-09-15, `macOS` env is missing it.
+By default this Action will call whatever `cargo` binary is available
+in the current [virtual environment](https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions).
 
 You can use [`actions-rs/toolchain`](https://github.com/actions-rs/toolchain)
-to install the Rust toolchain with `cargo` included.
+to install specific Rust toolchain with `cargo` included.
 
-## Cross
+## Cross-compilation
 
-In order to make cross-compilation an easy process,
+In order to make cross-compile an easy process,
 this Action can install [cross](https://github.com/rust-embedded/cross)
 tool on demand if `use-cross` input is enabled; `cross` executable will be invoked
 then instead of `cargo` automatically.
 
-All consequent calls of this Action in the same job will use the same `cross` installed.
+All consequent calls of this Action in the same job
+with `use-cross: true` input enabled will use the same `cross` installed.
 
 ```yaml
 on: [push]
@@ -63,7 +76,7 @@ jobs:
     name: Linux ARMv7
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -75,3 +88,17 @@ jobs:
           command: build
           args: --target armv7-unknown-linux-gnueabihf
 ```
+
+## License
+
+This Action is distributed under the terms of the MIT license, see [LICENSE](https://github.com/actions-rs/toolchain/blob/master/LICENSE) for details.
+
+## Contribute and support
+
+Any contributions are welcomed!
+
+If you want to report a bug or have a feature request,
+check the [Contributing guide](https://github.com/actions-rs/.github/blob/master/CONTRIBUTING.md).
+
+You can also support author by funding the ongoing project work,
+see [Sponsoring](https://actions-rs.github.io/#sponsoring).
