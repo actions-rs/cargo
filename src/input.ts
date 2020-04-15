@@ -10,6 +10,7 @@ import stringArgv from "string-argv";
 export interface Input {
     command: string;
     toolchain?: string;
+    "working-directory"?: string;
     args: string[];
     useCross: boolean;
 }
@@ -22,11 +23,13 @@ export function get(): Input {
         toolchain = toolchain.slice(1);
     }
     const useCross = input.getInputBool("use-cross");
+    const workingDir = input.getInput("working-directory");
 
     return {
         command: command,
         args: args,
         useCross: useCross,
         toolchain: toolchain || undefined,
+        "working-directory": workingDir || undefined
     };
 }

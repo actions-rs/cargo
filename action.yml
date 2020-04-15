@@ -17,6 +17,9 @@ inputs:
   use-cross:
     description: Use cross instead of cargo
     default: false
+  working-directory:
+    description: Where to start the cargo process
+    required: false
 
 runs:
   using: 'node12'
