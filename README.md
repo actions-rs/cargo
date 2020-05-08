@@ -12,8 +12,9 @@ command on a Rust language project.
 **Table of Contents**
 
 * [Example workflow](#example-workflow)
+* [Use cases](#use-cases)
 * [Inputs](#inputs)
-* [Virtual environments](#virtual-environments)
+* [Toolchain](#toolchain)
 * [Cross-compilation](#cross-compilation)
 * [License](#license)
 * [Contribute and support](#contribute-and-support)
@@ -31,6 +32,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
       - uses: actions-rs/cargo@v1
         with:
           command: build
@@ -38,6 +42,30 @@ jobs:
 ```
 
 See [additional recipes here](https://github.com/actions-rs/meta).
+
+## Use cases
+
+Note that this Action is not required usually
+and you can just use [`run`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun)
+step instead as in example below:
+
+```yaml
+jobs:
+  build_and_test:
+    name: Rust project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: cargo build --release --all-features
+```
+
+Why would you want to use this Action instead:
+
+1. Transparent `cross` installation and execution with `use-cross: true` input enabled
+2. Warnings and errors issued by `cargo` will be displayed in GitHub UI
 
 ## Inputs
 
