@@ -48,7 +48,7 @@
         "jest-circus": "^26.6.1",
         "npm-check-updates": "^7.0.2",
         "prettier": "^2.0.5",
-        "ts-jest": "^26.1.4",
+        "ts-jest": "^26.4.3",
         "typescript": "^3.9.7"
     }
 }
