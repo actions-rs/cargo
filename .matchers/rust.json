@@ -1,7 +1,7 @@
 {
     "problemMatcher": [
         {
-            "owner": "rust",
+            "owner": "rust-diagnostic",
             "pattern": [
                 {
                     "regexp": "^(warning|warn|error)(\\[(.*)\\])?: (.*)$",
@@ -14,6 +14,27 @@
                     "file": 2,
                     "line": 3,
                     "column": 4
+                }
+            ]
+        },
+        {
+            "owner": "rust-panic",
+            "pattern": [
+                {
+                    "regexp": "^(thread\\s+'[^']+'\\s+panicked\\s+at\\s+'[^']+(?:'|$))(?:,\\s+([^/\\\\][^:]+):(\\d+):(\\d+))?",
+                    "file": 2,
+                    "line": 3,
+                    "column": 4,
+                    "message": 1
+                }
+            ]
+        },
+        {
+            "owner": "rust-test-failure",
+            "pattern": [
+                {
+                    "regexp": "^(test\\s+\\w+\\s+\\.{3}\\s+FAILED)",
+                    "message": 1
                 }
             ]
         }
