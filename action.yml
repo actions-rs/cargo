@@ -1,23 +1,25 @@
-name: 'rust-cargo'
-description: 'Run cargo command'
-author: 'actions-rs team'
+name: "rust-cargo"
+description: "Run cargo command"
+author: "ructions team"
 branding:
   icon: play-circle
-  color: black
+  color: "gray-dark"
 inputs:
   command:
     description: Cargo command to run (ex. `check` or `build`)
     required: true
   toolchain:
     description: Toolchain to use (without the `+` sign, ex. `nightly`)
+    default: stable
     required: false
   args:
     description: Arguments for the cargo command
     required: false
-  use-cross:
+  use_cross:
     description: Use cross instead of cargo
-    default: false
+    default: "false"
+    required: false
 
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node16"
+  main: "dist/index.js"

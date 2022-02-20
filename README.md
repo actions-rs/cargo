@@ -1,10 +1,10 @@
 # Rust `cargo` Action
 
-[![Sponsoring](https://img.shields.io/badge/Support%20it-Say%20%22Thank%20you!%22-blue)](https://actions-rs.github.io/#sponsoring)
+[![Sponsoring](https://img.shields.io/badge/Support%20it-Say%20%22Thank%20you!%22-blue)](https://ructions.github.io/#sponsoring)
 ![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)
-[![Gitter](https://badges.gitter.im/actions-rs/community.svg)](https://gitter.im/actions-rs/community)
-![Continuous integration](https://github.com/actions-rs/cargo/workflows/Continuous%20integration/badge.svg)
-![Dependabot enabled](https://api.dependabot.com/badges/status?host=github&repo=actions-rs/toolchain)
+[![Gitter](https://badges.gitter.im/ructions/community.svg)](https://gitter.im/ructions/community)
+![Continuous integration](https://github.com/ructions/cargo/workflows/Continuous%20integration/badge.svg)
+![Dependabot enabled](https://api.dependabot.com/badges/status?host=github&repo=ructions/toolchain)
 
 This GitHub Action runs specified [`cargo`](https://github.com/rust-lang/cargo)
 command on a Rust language project.
@@ -32,16 +32,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: ructions/toolchain@v1
         with:
           toolchain: stable
-      - uses: actions-rs/cargo@v1
+      - uses: ructions/cargo@v1
         with:
           command: build
           args: --release --all-features
 ```
 
-See [additional recipes here](https://github.com/actions-rs/meta).
+See [additional recipes here](https://github.com/ructions/meta).
 
 ## Use cases
 
@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: ructions/toolchain@v1
         with:
           toolchain: stable
       - run: cargo build --release --all-features
@@ -70,10 +70,10 @@ Why would you want to use this Action instead:
 ## Inputs
 
 | Name        | Required | Description                                                              | Type   | Default |
-| ------------| :------: | -------------------------------------------------------------------------| ------ | --------|
-| `command`   | ✓        | Cargo command to run, ex. `check` or `build`                             | string |         |
+| ----------- | :------: | ------------------------------------------------------------------------ | ------ | ------- |
+| `command`   |    ✓     | Cargo command to run, ex. `check` or `build`                             | string |         |
 | `toolchain` |          | Rust toolchain name to use                                               | string |         |
-| `args`      |          | Arguments for the cargo command                                          | string |         |     
+| `args`      |          | Arguments for the cargo command                                          | string |         |
 | `use-cross` |          | Use [`cross`](https://github.com/rust-embedded/cross) instead of `cargo` | bool   | false   |
 
 ## Toolchain
@@ -81,7 +81,7 @@ Why would you want to use this Action instead:
 By default this Action will call whatever `cargo` binary is available
 in the current [virtual environment](https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions).
 
-You can use [`actions-rs/toolchain`](https://github.com/actions-rs/toolchain)
+You can use [`ructions/toolchain`](https://github.com/ructions/toolchain)
 to install specific Rust toolchain with `cargo` included.
 
 ## Cross-compilation
@@ -105,12 +105,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: ructions/toolchain@v1
         with:
           toolchain: stable
           target: armv7-unknown-linux-gnueabihf
           override: true
-      - uses: actions-rs/cargo@v1
+      - uses: ructions/cargo@v1
         with:
           use-cross: true
           command: build
@@ -119,14 +119,14 @@ jobs:
 
 ## License
 
-This Action is distributed under the terms of the MIT license, see [LICENSE](https://github.com/actions-rs/toolchain/blob/master/LICENSE) for details.
+This Action is distributed under the terms of the MIT license, see [LICENSE](https://github.com/ructions/toolchain/blob/master/LICENSE) for details.
 
 ## Contribute and support
 
 Any contributions are welcomed!
 
 If you want to report a bug or have a feature request,
-check the [Contributing guide](https://github.com/actions-rs/.github/blob/master/CONTRIBUTING.md).
+check the [Contributing guide](https://github.com/ructions/.github/blob/master/CONTRIBUTING.md).
 
 You can also support author by funding the ongoing project work,
-see [Sponsoring](https://actions-rs.github.io/#sponsoring).
+see [Sponsoring](https://ructions.github.io/#sponsoring).
