@@ -1,38 +1,36 @@
-import path from "path";
+import { Input, get } from "./input";
+import { get as getCargo } from "./cargo";
+import { getOrInstall as getOrInstallCross } from "./cross";
+import { join } from "path";
+import { setFailed } from "@actions/core";
 
-import * as core from "@actions/core";
-
-import * as input from "./input";
-import { Cargo, Cross } from "@actions-rs/core";
-
-export async function run(actionInput: input.Input): Promise<void> {
+export async function run(actionInput: Input): Promise<void> {
     let program;
     if (actionInput.useCross) {
-        program = await Cross.getOrInstall();
+        program = await getOrInstallCross();
     } else {
-        program = await Cargo.get();
+        program = await getCargo();
     }
 
-    let args: string[] = [];
+    const args: string[] = [];
     if (actionInput.toolchain) {
         args.push(`+${actionInput.toolchain}`);
     }
     args.push(actionInput.command);
-    args = args.concat(actionInput.args);
 
-    await program.call(args);
+    await program.call(args.concat(actionInput.args));
 }
 
 async function main(): Promise<void> {
-    const matchersPath = path.join(__dirname, ".matchers");
-    console.log(`::add-matcher::${path.join(matchersPath, "rust.json")}`);
+    const matchersPath = join(__dirname, ".matchers");
+    console.log(`::add-matcher::${join(matchersPath, "rust.json")}`);
 
-    const actionInput = input.get();
+    const actionInput = get();
 
     try {
         await run(actionInput);
     } catch (error) {
-        core.setFailed((<Error>error).message);
+        setFailed((<Error>error).message);
     }
 }
 
