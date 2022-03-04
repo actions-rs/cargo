@@ -17,6 +17,11 @@ inputs:
   use-cross:
     description: Use cross instead of cargo
     default: false
+outputs:
+  stdout:
+    description: Standard out of the program
+  stderr:
+    description: Standard err of the program
 
 runs:
   using: 'node12'
