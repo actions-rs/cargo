@@ -49,8 +49,12 @@ async function main(): Promise<void> {
 
     try {
         const { stdout, stderr } = await run(actionInput);
+        core.startGroup("setting outputs");
+        console.log("stdout: ", stdout.slice(0, 50), "...");
         core.setOutput("stdout", stdout);
-        core.setOutput("stdout", stderr);
+        console.log("stderr: ", stderr.slice(0, 50), "...");
+        core.setOutput("stderr", stderr);
+        core.endGroup();
     } catch (error) {
         core.setFailed((<Error>error).message);
     }
