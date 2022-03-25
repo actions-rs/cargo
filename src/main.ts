@@ -5,7 +5,9 @@ import * as core from "@actions/core";
 import * as input from "./input";
 import { Cargo, Cross } from "@actions-rs/core";
 
-export async function run(actionInput: input.Input): Promise<void> {
+export async function run(
+    actionInput: input.Input
+): Promise<{ code: number; stdout: string; stderr: string }> {
     let program;
     if (actionInput.useCross) {
         program = await Cross.getOrInstall();
@@ -20,7 +22,23 @@ export async function run(actionInput: input.Input): Promise<void> {
     args.push(actionInput.command);
     args = args.concat(actionInput.args);
 
-    await program.call(args);
+    let stdout = "";
+    let stderr = "";
+
+    const options = {
+        listeners: {
+            stdout: (data: Buffer) => {
+                stdout += data.toString();
+            },
+            stderr: (data: Buffer) => {
+                stderr += data.toString();
+            },
+        },
+    };
+
+    const code = await program.call(args, options);
+
+    return { code, stdout, stderr };
 }
 
 async function main(): Promise<void> {
@@ -30,7 +48,13 @@ async function main(): Promise<void> {
     const actionInput = input.get();
 
     try {
-        await run(actionInput);
+        const { stdout, stderr } = await run(actionInput);
+        core.startGroup("setting outputs");
+        console.log("stdout: ", stdout.slice(0, 50), "...");
+        core.setOutput("stdout", stdout);
+        console.log("stderr: ", stderr.slice(0, 50), "...");
+        core.setOutput("stderr", stderr);
+        core.endGroup();
     } catch (error) {
         core.setFailed((<Error>error).message);
     }
