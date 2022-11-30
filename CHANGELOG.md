@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Upgrade action.yml to use Node16 (replacing Node12)
 - Bump version number to 1.1.0
+- See if another update triggers good stuff
 
 ## [1.0.3] - 2019-11-24
 
