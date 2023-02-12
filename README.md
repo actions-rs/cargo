@@ -23,19 +23,17 @@ command on a Rust language project.
 
 ```yaml
 on: [push]
-
 name: CI
-
 jobs:
   build_and_test:
     name: Rust project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v3
+      - uses: synthet-ic/action-rustup@main
         with:
           toolchain: stable
-      - uses: actions-rs/cargo@v1
+      - uses: synthet-ic/action-cargo@main
         with:
           command: build
           args: --release --all-features
@@ -55,8 +53,8 @@ jobs:
     name: Rust project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v3
+      - uses: synthet-ic/action-rustup@main
         with:
           toolchain: stable
       - run: cargo build --release --all-features
@@ -104,13 +102,13 @@ jobs:
     name: Linux ARMv7
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v3
+      - uses: synthet-ic/action-rustup@main
         with:
           toolchain: stable
           target: armv7-unknown-linux-gnueabihf
           override: true
-      - uses: actions-rs/cargo@v1
+      - uses: synthet-ic/action-cargo@main
         with:
           use-cross: true
           command: build
