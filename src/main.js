@@ -5,7 +5,7 @@ import * as core from "@actions/core";
 import * as input from "./input";
 import { Cargo, Cross } from "action-core";
 
-export async function run(actionInput: input.Input): Promise<void> {
+export async function run(actionInput: input.Input) {
     let program;
     if (actionInput.useCross) {
         program = await Cross.getOrInstall();
@@ -13,7 +13,7 @@ export async function run(actionInput: input.Input): Promise<void> {
         program = await Cargo.get();
     }
 
-    let args: string[] = [];
+    let args = [];
     if (actionInput.toolchain) {
         args.push(`+${actionInput.toolchain}`);
     }
@@ -23,12 +23,10 @@ export async function run(actionInput: input.Input): Promise<void> {
     await program.call(args);
 }
 
-async function main(): Promise<void> {
+async function main() {
     const matchersPath = path.join(__dirname, ".matchers");
     console.log(`::add-matcher::${path.join(matchersPath, "rust.json")}`);
-
     const actionInput = input.get();
-
     try {
         await run(actionInput);
     } catch (error) {
