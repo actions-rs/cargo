@@ -12,7 +12,7 @@ const testEnvVars = {
 describe("actions-rs/cargo/input", () => {
     beforeEach(() => {
         for (const key in testEnvVars)
-            process.env[key] = testEnvVars[key as keyof typeof testEnvVars];
+            process.env[key] = testEnvVars[key];
     });
 
     it("Parses action input into cargo input", () => {
