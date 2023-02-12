@@ -3,7 +3,7 @@ import path from "path";
 import * as core from "@actions/core";
 
 import * as input from "./input";
-import { Cargo, Cross } from "@actions-rs/core";
+import { Cargo, Cross } from "action-core";
 
 export async function run(actionInput: input.Input): Promise<void> {
     let program;
