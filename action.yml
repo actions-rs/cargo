@@ -17,7 +17,5 @@ inputs:
   use-cross:
     description: Use cross instead of cargo
     default: false
-
 runs:
-  using: 'node12'
   main: 'dist/index.js'
