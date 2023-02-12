@@ -5,7 +5,7 @@ import * as core from "@actions/core";
 import * as input from "./input";
 import { Cargo, Cross } from "action-core";
 
-export async function run(actionInput: input.Input) {
+export async function run(actionInput) {
     let program;
     if (actionInput.useCross) {
         program = await Cross.getOrInstall();
