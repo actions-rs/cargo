@@ -18,4 +18,5 @@ inputs:
     description: Use cross instead of cargo
     default: false
 runs:
+  using: 'node16'
   main: 'dist/index.js'
