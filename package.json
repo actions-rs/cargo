@@ -1,9 +1,10 @@
 {
-    "name": "rust-cargo",
+    "name": "action-cargo",
     "version": "1.0.3",
     "private": false,
     "description": "Run cargo command",
     "main": "src/main.js",
+    "type": "module",
     "directories": {
         "test": "__tests__"
     },
