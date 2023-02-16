@@ -4,7 +4,7 @@
 
 import { input } from "action-core";
 
-import stringArgv from "string-argv";
+import { parseArgsStringToArgv } from "string-argv";
 
 // Parsed action input
 // export interface Input {
@@ -16,7 +16,7 @@ import stringArgv from "string-argv";
 
 export function get() {
     const command = input.getInput("command", { required: true });
-    const args = stringArgv(input.getInput("args"));
+    const args = parseArgsStringToArgv(input.getInput("args"));
     let toolchain = input.getInput("toolchain");
     if (toolchain.startsWith("+")) {
         toolchain = toolchain.slice(1);

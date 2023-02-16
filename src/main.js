@@ -30,7 +30,7 @@ async function main() {
     try {
         await run(actionInput);
     } catch (error) {
-        core.setFailed((<Error>error).message);
+        core.setFailed(error.message);
     }
 }
 
